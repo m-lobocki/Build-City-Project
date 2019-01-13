@@ -1,2 +1,7 @@
 .vs/
 .bin/
+include/SFML/
+bin/*.dll
+lib/cmake
+lib/*.lib
+lib/*.pdb
