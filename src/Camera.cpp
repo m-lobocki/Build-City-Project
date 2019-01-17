@@ -1,8 +1,5 @@
 #include "Camera.h"
 
-sf::Clock clock;
-Camera::Direction scrolling_direction = Camera::Direction::None;
-
 Camera::Camera(std::shared_ptr<Settings>& settings_ptr)
 {
 	this->settings_ptr = settings_ptr;
@@ -10,20 +7,31 @@ Camera::Camera(std::shared_ptr<Settings>& settings_ptr)
 	set_game_resolution(settings_ptr->game_resolution);
 }
 
-sf::View Camera::get_view()
+/// called every tick
+sf::View Camera::refresh(sf::Vector2i mouse_position, float mouse_wheel_delta)
 {
+	follow_mouse(mouse_position, mouse_wheel_delta);
+	refresh_clock.restart();
 	return view;
 }
 
-void Camera::follow_mouse(sf::Vector2i mouse_position)
+void Camera::follow_mouse(sf::Vector2i mouse_position, float mouse_wheel_delta)
 {
-	for(int direction = 0; direction < 4; direction++)
+	float dt = refresh_clock.getElapsedTime().asSeconds();
+	for (auto [rectangle, movement_vector] : camera_movement_triggers)
 	{
-		auto[rectangle, movement_vector] = camera_movement_triggers[direction];
 		if(rectangle.contains(mouse_position))
 		{
-			view.move(movement_vector);
+			view.move(movement_vector * dt);
 		}
+	}
+	if(mouse_wheel_delta > 0)
+	{
+		view.zoom(0.99f);
+	}
+	else if(mouse_wheel_delta < 0)
+	{
+		view.zoom(1.01f);
 	}
 }
 
@@ -41,7 +49,7 @@ void Camera::set_game_resolution(sf::Vector2f game_resolution)
 	view.setSize(game_resolution);
 }
 
-void Camera::refresh_resolution()
+void Camera::update_resolution()
 {
 	set_game_resolution(settings_ptr->game_resolution);
 }

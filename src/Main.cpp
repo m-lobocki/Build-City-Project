@@ -23,6 +23,7 @@ int main()
 
 	while (window.isOpen())
 	{
+		float mouse_wheel_delta = 0;
 		sf::Event event{};
 		while (window.pollEvent(event))
 		{
@@ -33,11 +34,11 @@ int main()
 			if (event.type == sf::Event::Resized)
 			{
 				settings_ptr->game_resolution = sf::Vector2f(event.size.width, event.size.height);
-				camera.refresh_resolution();
+				camera.update_resolution();
 			}
-			if (event.type == sf::Event::MouseMoved)
+			if (event.type == sf::Event::MouseWheelScrolled)
 			{
-				camera.follow_mouse(sf::Mouse::getPosition(window));
+				mouse_wheel_delta = event.mouseWheelScroll.delta;
 			}
 		}
 
@@ -45,7 +46,8 @@ int main()
 		window.setView(map_view);
 
 		sf::Vector2f player_position = camera.get_position();
-		window.setView(camera.get_view());
+		sf::Vector2i mouse_position = sf::Mouse::getPosition(window);
+		window.setView(camera.refresh(mouse_position, mouse_wheel_delta));
 		window.draw(shape);
 
 		sf::View gui_view(sf::FloatRect(sf::Vector2f(0, 0), settings_ptr->game_resolution));
@@ -69,6 +71,7 @@ void print_working_directory()
 	std::string::size_type pos = std::string(buffer).find_last_of("\\/");
 	std::cout << std::string(buffer).substr(0, pos) << std::endl;
 #else
-	std::cout << "Not supported yet" << std::endl;
+	//cos nie dziala
+	//std::cout << std::filesystem::current_path() << std::endl;
 #endif
 }

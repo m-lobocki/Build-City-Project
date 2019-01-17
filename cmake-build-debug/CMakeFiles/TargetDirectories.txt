@@ -1,0 +1,3 @@
+/home/mati/Dokumenty/C++/Projekt-wdpc/Build-City-Project/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/mati/Dokumenty/C++/Projekt-wdpc/Build-City-Project/cmake-build-debug/CMakeFiles/BuilCityGame.dir
+/home/mati/Dokumenty/C++/Projekt-wdpc/Build-City-Project/cmake-build-debug/CMakeFiles/edit_cache.dir
