@@ -1,13 +1,14 @@
 #pragma once
 
 #include <tuple>
+#include <SFML/Window.hpp>
 #include "SFML/Graphics/View.hpp"
 #include "ViewLayer.h"
 
 class Camera : public ViewLayer
 {
 private:
-	const float movement_speed = 200;
+	const float movement_speed = 250;
 	const int border_thickness = 50;
     std::tuple<sf::IntRect, sf::Vector2f> camera_movement_triggers[4];
 protected:
@@ -20,4 +21,5 @@ public:
 	};
 	Camera(sf::Vector2f resolution);
 	sf::Vector2f get_position();
+	sf::Vector2i get_pixel_position(const sf::RenderWindow& window, sf::Vector2i mouse_position);
 };

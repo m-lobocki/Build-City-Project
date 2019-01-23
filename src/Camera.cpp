@@ -1,3 +1,4 @@
+#include <SFML/Graphics/RenderWindow.hpp>
 #include "Camera.h"
 
 Camera::Camera(sf::Vector2f resolution) : ViewLayer(resolution)
@@ -27,4 +28,10 @@ void Camera::on_resize(sf::Vector2f game_resolution)
 sf::Vector2f Camera::get_position()
 {
 	return view.getCenter();
+}
+
+sf::Vector2i Camera::get_pixel_position(const sf::RenderWindow &window, sf::Vector2i mouse_position)
+{
+	sf::Vector2f pixel_position_float = window.mapPixelToCoords(mouse_position, view);
+	return sf::Vector2i(int(pixel_position_float.x), int(pixel_position_float.y));
 }
