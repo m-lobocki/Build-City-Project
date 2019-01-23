@@ -20,3 +20,7 @@ void ViewLayer::update_resolution(sf::Vector2f new_resolution)
 sf::View ViewLayer::generate_view(sf::Vector2f resolution) {
     return sf::View(sf::FloatRect(sf::Vector2f(0, 0), resolution));
 }
+
+sf::View ViewLayer::get_view() {
+    return view;
+}

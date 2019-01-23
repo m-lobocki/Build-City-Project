@@ -14,4 +14,5 @@ public:
     ViewLayer(sf::Vector2f resolution);
     sf::View refresh(float delta_time, sf::Vector2i mouse_position);
     void update_resolution(sf::Vector2f new_resolution);
+    sf::View get_view();
 };
