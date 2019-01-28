@@ -1,8 +1,17 @@
-//
-// Created by mati on 25.01.19.
-//
+#pragma once
 
-#ifndef PROJECT_TAB_H
-#define PROJECT_TAB_H
+#include "Resources.h"
+#include "GuiComponent.h"
+#include "Highlightable.h"
 
-#endif //PROJECT_TAB_H
+class Tab : public GuiComponent, public Highlightable
+{
+    const float icon_scale = 0.8f;
+    Asset icon;
+    GuiComponent content;
+public:
+    Tab(const std::string& name, Asset icon, GuiComponent content);
+    Asset get_icon();
+    GuiComponent get_content();
+    void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
+};
