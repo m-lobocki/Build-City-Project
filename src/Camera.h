@@ -9,7 +9,7 @@ class Camera : public ViewLayer
 {
 private:
 	const float movement_speed = 250;
-	const int border_thickness = 50;
+	const int border_thickness = 20;
     std::tuple<sf::IntRect, sf::Vector2f> camera_movement_triggers[4];
 protected:
 	void on_tick(float delta_time, sf::Vector2i mouse_position) override;
