@@ -5,3 +5,7 @@ bin/*.dll
 lib/cmake
 lib/*.lib
 lib/*.pdb
+lib/*.so
+lib/*.2.5
+lib/*.2.5.1
+cmake-build-debug/
