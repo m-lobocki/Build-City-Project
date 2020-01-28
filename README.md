@@ -1,2 +1,1 @@
-A simple game inspired by [SimCity™](https://www.ea.com/games/simcity) series.
-Work in progress.
+A simple 2D game engine. To improve in future :)
